@@ -9,7 +9,7 @@ class classes
 		string []input;
 		int counter = 0;
 		Dictionary<string, int> labels = new Dictionary<string, int>();
-		var a = new Instructions;
+		var a = new Instructions();
 
 		if(args.Length == 0)
 		{
