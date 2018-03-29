@@ -7,18 +7,27 @@ class classes
 	public static void Main(string[] args){
 		string s;
 		string []input;
+		int counter = 0;
 		Dictionary<string, int> labels = new Dictionary<string, int>();
-
+		
+		if(args.Length == 0)
+		{
+			Console.WriteLine("Please enter input file");
+			return;
+		}
 		using(StreamReader sr = File.OpenText(args[0]))
 		{
 			while((s = sr.ReadLine()) != null)	//first pass through file once and find labels
 			{
-				if(s[0] != '/' && s[0] != '#')	//ignore comments	
+				if(s != "" && s != "\n" && s[0] != '/' && s[0] != '#')	//ignore comments	
 				{
 					input = s.Split(' ');
-					if(input[0][input[0].Length] == ':')	//check for label by looking for colon
+					if(input[0][input[0].Length-1] == ':')	//check for label by looking for colon
 					{
-						labels.Add(input[0].Substring(0, input.Length-1), Int32.Parse(input[1])); //add to labels
+						labels.Add(input[0].Trim(':'), counter); //add to labels
+					}else
+					{
+						counter += 4;	
 					}
 				}
 			}
@@ -31,10 +40,10 @@ class classes
 		{
 			while((s = sr.ReadLine()) != null)	//first pass through file once and find labels
 			{
-				if(s[0] != '/' && s[0] != '#')	//ignore comments	
+				if(s != "" && s[0] != '/' && s[0] != '#')	//ignore comments	
 				{
 					input = s.Split(' ');
-					if(input[0][input[0].Length] != ':')	//check for instructions by looking for colon
+					if(input[0][input[0].Length-1] != ':')	//check for instructions by looking for colon
 					{
 						//call interface function
 					}
