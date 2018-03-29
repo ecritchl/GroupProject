@@ -109,18 +109,20 @@ class Instructions : IInstructions //Converts everything to 32 bits with the spe
 		return b;
 	}
 
-	public byte[] If(int cond, Int32 val)//converts to 32 bits and changes specified bits as needed
+	public byte[] If(int cond, Int32 val, int pc)//converts to 32 bits and changes specified bits as needed
 	{
 		cond += 128;
+		val = val - pc + 4;
 		byte[] b = BitConverter.GetBytes(val);
 		b[3] = (byte) (b[3] & 0x01);
 		b[3] = (byte) (b[3] | Convert.ToByte(cond));
 		return b;
 	}
 
-	public byte[] IfZ(int cond, Int32 val)//converts to 32 bits and changes specified bits as needed
+	public byte[] IfZ(int cond, Int32 val, int pc)//converts to 32 bits and changes specified bits as needed
 	{
 		cond += 144;
+		val = val - pc + 4;
 		byte[] b = BitConverter.GetBytes(val);
 		b[3] = (byte) (b[3] & 0x01);
 		b[3] = (byte) (b[3] | Convert.ToByte(cond));
