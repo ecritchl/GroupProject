@@ -35,7 +35,7 @@ class Instructions : IInstructions //Converts everything to 32 bits with the spe
 
 	public byte[] Push(Int32 val) //converts to 32 bits and changes last 4 bits to specified order
 	{
-		byte[] b = ByteConvert.GetBytes(val);
+		byte[] b = BitConverter.GetBytes(val);
 		b[3] = (byte) (b[3] & 0xf);
 		b[3] = (byte) (b[3] | 0xf0);
 		return b;
@@ -124,7 +124,10 @@ class Instructions : IInstructions //Converts everything to 32 bits with the spe
 
 	public byte[] Dup(Int32 val)//converts to 32 bits and changes specified bits as needed
 	{
-		byte[] b = {0,0,0,0xc0};
+		val *= 4;
+		byte[] b = BitConverter.GetBytes(val);
+		b[3] = (byte) (b[3] & 0xf);
+		b[3] = (byte) (b[3] | 0xc0);
 		return b;
 	}
 
