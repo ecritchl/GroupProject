@@ -2,130 +2,137 @@ using System;
 
 class Instructions : IInstructions
 {
-	byte[4] Exit(int n)
+	public byte[] Exit(int n)
 	{
-		byte[4] b = {0,0,0,0};
+		byte[] b = {0,0,0,0};
 		b[0] = Convert.ToByte(n);
 		return b;
 	}
 
-	byte[4] Swap()
+	public byte[] Swap()
 	{
-		byte[4] b = {0,0,0,0x01};
+		byte[] b = {0,0,0,0x01};
 		return b;
 	}
 
-	byte[4] Inpt()
+	public byte[] Inpt()
 	{
-		byte[4] b = {0,0,0,0x02};
+		byte[] b = {0,0,0,0x02};
 		return b;
 	}
 
-	byte[4] Nop()
+	public byte[] Nop()
 	{
-		byte[4] b = {0,0,0,0x03};
+		byte[] b = {0,0,0,0x03};
 		return b;
 	}
 
-	byte[4] Pop()
+	public byte[] Pop()
 	{
-		byte[4] b = {0,0,0,0x10};
+		byte[] b = {0,0,0,0x10};
 		return b;
 	}
 
-	byte[4] Push()
+	public byte[] Push()
 	{
-		byte[4] b = {0,0,0,0xf0};
+		byte[] b = {0,0,0,0xf0};
 		return b;
 	}
 
-	byte[4] Add()
+	public byte[] Add()
 	{
-		byte[4] b = {0,0,0,0x20};
+		byte[] b = {0,0,0,0x20};
 		return b;
 	}
 
-	byte[4] Sub()
+	public byte[] Sub()
 	{
-		byte[4] b = {0,0,0,0x21};
+		byte[] b = {0,0,0,0x21};
 		return b;
 	}
 
-	byte[4] Mul()
+	public byte[] Mul()
 	{
-		byte[4] b = {0,0,0,0x22};
+		byte[] b = {0,0,0,0x22};
 		return b;
 	}
 
-	byte[4] Div()
+	public byte[] Div()
 	{
-		byte[4] b = {0,0,0,0x23};
+		byte[] b = {0,0,0,0x23};
 		return b;
 	}
 
-	byte[4] Rem()
+	public byte[] Rem()
 	{
-		byte[4] b = {0,0,0,0x24};
+		byte[] b = {0,0,0,0x2};
 		return b;
 	}
 
-	byte[4] And()
+	public byte[] And()
 	{
-		byte[4] b = {0,0,0,0x25};
+		byte[] b = {0,0,0,0x25};
 		return b;
 	}
 
-	byte[4] Or()
+	public byte[] Or()
 	{
-		byte[4] b = {0,0,0,0x26};
+		byte[] b = {0,0,0,0x26};
 		return b;
 	}
 
-	byte[4] Xor()
+	public byte[] Xor()
 	{
-		byte[4] b = {0,0,0,0x27};
+		byte[] b = {0,0,0,0x27};
 		return b;
 	}
 
-	byte[4] Neg()
+	public byte[] Neg()
 	{
-		byte[4] b = {0,0,0,0x30};
+		byte[] b = {0,0,0,0x30};
 		return b;
 	}
 
-	byte[4] Not()
+	public byte[] Not()
 	{
-		byte[4] b = {0,0,0,0x31};
+		byte[] b = {0,0,0,0x31};
 		return b;
 	}
 
-	byte[4] GoTo()
+	public byte[] GoTo()
 	{
-		byte[4] b = {0,0,0,0x70};
+		byte[] b = {0,0,0,0x70};
 		return b;
 	}
 
-	byte[4] If()
+	public byte[] If()
 	{
-	}
-
-	byte[4] IfZ()
-	{
-	}
-
-	byte[4] Dup()
-	{
-	}
-
-	byte[4] Print()
-	{
-		byte[4] b = {0,0,0,0xd0};
+		byte[] b = {0,0,0,0x80};
 		return b;
 	}
 
-	byte[4] Dump()
+	public byte[] IfZ()
 	{
-		byte[4] b = {0,0,0,0xe0};
+		byte[] b = {0,0,0,0x90};
+		return b;
+
+	}
+
+	public byte[] Dup()
+	{
+		byte[] b = {0,0,0,0xc0};
+		return b;
+	}
+
+	public byte[] Print()
+	{
+		byte[] b = {0,0,0,0xd0};
+		return b;
+	}
+
+	public byte[] Dump()
+	{
+		byte[] b = {0,0,0,0xe0};
 		return b;
 	}
 
