@@ -9,7 +9,8 @@ class classes
 		string []input;
 		int counter = 0;
 		Dictionary<string, int> labels = new Dictionary<string, int>();
-		
+		var a = new Instructions;
+
 		if(args.Length == 0)
 		{
 			Console.WriteLine("Please enter input file");
@@ -17,28 +18,24 @@ class classes
 		}
 		using(StreamReader sr = File.OpenText(args[0]))
 		{
-			while((s = sr.ReadLine()) != null)	//first pass through file once and find labels
+			while((s = sr.ReadLine()) != null)							//first pass through file once and find labels
 			{
 				if(s != "" && s != "\n" && s[0] != '/' && s[0] != '#')	//ignore comments	
 				{
 					input = s.Split(' ');
-					if(input[0][input[0].Length-1] == ':')	//check for label by looking for colon
+					if(input[0][input[0].Length-1] == ':')				//check for label by looking for colon
 					{
-						labels.Add(input[0].Trim(':'), counter); //add to labels
+						labels.Add(input[0].Trim(':'), counter);		//add to labels dictionary
 					}else
 					{
 						counter += 4;	
 					}
 				}
 			}
-			foreach(var i in labels)	//print all labels for error checking
-			{
-				Console.WriteLine($"Label: {i.Key}, Address: {i.Value}");
-			}
 		}
 		using(StreamReader sr = File.OpenText(args[0]))
 		{
-			while((s = sr.ReadLine()) != null)	//first pass through file once and find labels
+			while((s = sr.ReadLine()) != null)				//first pass through file once and find labels
 			{
 				if(s != "" && s[0] != '/' && s[0] != '#')	//ignore comments	
 				{
