@@ -114,7 +114,7 @@ class Instructions : IInstructions //Converts everything to 32 bits with the spe
 		cond += 128;
 		val = val - pc + 4;
 		byte[] b = BitConverter.GetBytes(val);
-		b[3] = (byte) (b[3] & 0x01);
+		b[3] = (byte) (b[3] & 0x00);
 		b[3] = (byte) (b[3] | Convert.ToByte(cond));
 		return b;
 	}
@@ -124,7 +124,7 @@ class Instructions : IInstructions //Converts everything to 32 bits with the spe
 		cond += 144;
 		val = val - pc + 4;
 		byte[] b = BitConverter.GetBytes(val);
-		b[3] = (byte) (b[3] & 0x01);
+		b[3] = (byte) (b[3] & 0x00);
 		b[3] = (byte) (b[3] | Convert.ToByte(cond));
 		return b;
 
