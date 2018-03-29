@@ -1,3 +1,6 @@
+//CS 365: Group Project 1
+//Ellis Critchlow and Jacob Isaacs
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -51,7 +54,7 @@ class classes
 						if(input[0][input[0].Length-1] != ':')	//check for instructions by looking for colon
 						{
 							counter += 4;
-							Console.WriteLine($"{input[0]}");	//split is not seperating lines by whitespace
+							//Console.WriteLine($"{input[0]}");	//split is not seperating lines by whitespace
 							switch(input[0])		//call interface function
 							{
 								case "exit":
