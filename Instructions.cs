@@ -33,9 +33,11 @@ class Instructions : IInstructions
 		return b;
 	}
 
-	public byte[] Push()
+	public byte[] Push(int32 val)
 	{
-		byte[] b = {0,0,0,0xf0};
+		byte[] b = ByteConvert.GetBytes(val);
+		b[3] = (byte) (b[3] & 0xf);
+		b[3] = (byte) (b[3] | 0xf0);
 		return b;
 	}
 
@@ -99,26 +101,28 @@ class Instructions : IInstructions
 		return b;
 	}
 
-	public byte[] GoTo()
+	public byte[] GoTo(int32 val)
 	{
 		byte[] b = {0,0,0,0x70};
 		return b;
 	}
 
-	public byte[] If()
+	public byte[] If(int cond, int32 val)
 	{
-		byte[] b = {0,0,0,0x80};
+		cond += 128;
+		byte[] b = {0,0,0,Convert.ToByte(cond)};
 		return b;
 	}
 
-	public byte[] IfZ()
+	public byte[] IfZ(int cond, int32 val)
 	{
-		byte[] b = {0,0,0,0x90};
+		cond += 144;
+		byte[] b = {0,0,0,Convert.ToByte(cond)};
 		return b;
 
 	}
 
-	public byte[] Dup()
+	public byte[] Dup(int32 val)
 	{
 		byte[] b = {0,0,0,0xc0};
 		return b;

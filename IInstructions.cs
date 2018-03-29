@@ -7,7 +7,7 @@ interface IInstructions
 	byte[] Inpt();
 	byte[] Nop();
 	byte[] Pop();
-	byte[] Push();
+	byte[] Push(int32 val);
 	byte[] Add();
 	byte[] Sub();
 	byte[] Mul();
@@ -18,10 +18,10 @@ interface IInstructions
 	byte[] Xor();
 	byte[] Neg();
 	byte[] Not();
-	byte[] GoTo();
-	byte[] If();
-	byte[] IfZ();
-	byte[] Dup();
+	byte[] GoTo(int32 val);
+	byte[] If(int cond, int32 val);
+	byte[] IfZ(int cond, int32 val);
+	byte[] Dup(int32 val);
 	byte[] Print();
 	byte[] Dump();
 }
