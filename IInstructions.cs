@@ -19,8 +19,8 @@ interface IInstructions //Interface for all Vmach instructions
 	byte[] Neg();
 	byte[] Not();
 	byte[] GoTo(Int32 val);
-	byte[] If(int cond, Int32 val);
-	byte[] IfZ(int cond, Int32 val);
+	byte[] If(int cond, Int32 val, int pc);
+	byte[] IfZ(int cond, Int32 val, int pc);
 	byte[] Dup(Int32 val);
 	byte[] Print();
 	byte[] Dump();
