@@ -166,7 +166,7 @@ class classes
 	public static byte[] IfCase(ref Dictionary<string, int> labels, ref string[] input, int i, bool j)
 	{
 		var a = new Instructions();
-		byte[] b;
+		byte[] b = {0,0,0,0};
 		if(input.Length > 1)
 		{
 			if(labels.ContainsKey(input[1]))
@@ -178,15 +178,13 @@ class classes
 				{
 					b = a.IfZ(i, labels[input[1]]);	
 				}
-			}else
+			}
+			else
 			{
 				Console.WriteLine("label not found");
-				b = new byte[] {0x00, 0x00, 0x00, 0x00};
 			}
-		}else
-		{
-			b = new byte[] {0x00, 0x00, 0x00, 0x00};	
 		}
+
 		return b;
 	}
 }
