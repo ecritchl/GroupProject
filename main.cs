@@ -8,6 +8,7 @@ class classes
 		string s;
 		string []input;
 		int counter = 0;
+		bytes[4] b;
 		Dictionary<string, int> labels = new Dictionary<string, int>();
 		var a = new Instructions();
 
@@ -42,7 +43,13 @@ class classes
 					input = s.Split(' ');
 					if(input[0][input[0].Length-1] != ':')	//check for instructions by looking for colon
 					{
-						//call interface function
+						switch(input[0])		//call interface function
+						{
+							case "Exit":
+								b = Exit(); //something
+								break;
+							case 
+						}	
 					}
 				}
 			}
