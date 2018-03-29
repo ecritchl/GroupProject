@@ -103,21 +103,27 @@ class Instructions : IInstructions //Converts everything to 32 bits with the spe
 
 	public byte[] GoTo(Int32 val)//converts to 32 bits and changes specified bits as needed
 	{
-		byte[] b = {0,0,0,0x70};
+		byte[] b = BitConverter.GetBytes(val);
+		b[3] = (byte) (b[3] & 0xf);
+		b[3] = (byte) (b[3] | 0x70);
 		return b;
 	}
 
 	public byte[] If(int cond, Int32 val)//converts to 32 bits and changes specified bits as needed
 	{
 		cond += 128;
-		byte[] b = {0,0,0,Convert.ToByte(cond)};
+		byte[] b = BitConverter.GetBytes(val);
+		b[3] = (byte) (b[3] & 0x01);
+		b[3] = (byte) (b[3] | Convert.ToByte(cond));
 		return b;
 	}
 
 	public byte[] IfZ(int cond, Int32 val)//converts to 32 bits and changes specified bits as needed
 	{
 		cond += 144;
-		byte[] b = {0,0,0,Convert.ToByte(cond)};
+		byte[] b = BitConverter.GetBytes(val);
+		b[3] = (byte) (b[3] & 0x01);
+		b[3] = (byte) (b[3] | Convert.ToByte(cond));
 		return b;
 
 	}
