@@ -59,3 +59,15 @@ class classes
 
 //var i = -44;		//conversion from int to hex
 //Console.WriteLine(i.ToString("X"));
+
+using (FileStream bw = new FileStream("test.bin",FileMode.Create))
+		{
+			//The data type to write is inferred from the parameter
+		//	byte[] b = {0xfe,0xed,0xbe,0xef};
+		//	bw.WriteByte(b[0]);
+	//		bw.WriteByte(b[1]);
+	//		bw.WriteByte(b[2]);
+	//		bw.WriteByte(b[3]); 
+			foreach(var a in b)
+				bw.WriteByte(a);
+		}
