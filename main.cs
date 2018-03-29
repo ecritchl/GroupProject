@@ -34,6 +34,7 @@ class classes
 				}
 			}
 		}
+		counter = 0;
 		using (FileStream bw = new FileStream("test.bin",FileMode.Create))
 		{
 			bw.WriteByte(0xfe);
@@ -49,6 +50,7 @@ class classes
 						input = s.Split(null);
 						if(input[0][input[0].Length-1] != ':')	//check for instructions by looking for colon
 						{
+							counter += 4;
 							Console.WriteLine($"{input[0]}");	//split is not seperating lines by whitespace
 							switch(input[0])		//call interface function
 							{
@@ -111,7 +113,13 @@ class classes
 											b = a.GoTo(labels[input[1]]);
 										}else
 										{
-											b = a.GoTo(int.Parse(input[1], System.Globalization.NumberStyles.HexNumber));	
+											if(input[1].Length > 1 && input[1][1] == 'x')
+											{
+												b = a.GoTo(Convert.ToInt32(input[1], 16));	
+											}else
+											{
+												b = a.GoTo(int.Parse(input[1]));	
+											}
 										}
 									}else
 									{
@@ -119,34 +127,34 @@ class classes
 									}
 									break;
 								case "ifeq":			 
-									b = IfCase(ref labels, ref input, 0, true);
+									b = IfCase(ref labels, ref input, 0, true, counter);
 									break;
 								case "ifne":			 
-									b = IfCase(ref labels, ref input, 1, true);
+									b = IfCase(ref labels, ref input, 1, true, counter);
 									break;
 								case "iflt":			 
-									b = IfCase(ref labels, ref input, 2, true);
+									b = IfCase(ref labels, ref input, 2, true, counter);
 									break;
 								case "ifgt":			 
-									b = IfCase(ref labels, ref input, 3, true);
+									b = IfCase(ref labels, ref input, 3, true, counter);
 									break;
 								case "ifle":			 
-									b = IfCase(ref labels, ref input, 4, true);
+									b = IfCase(ref labels, ref input, 4, true, counter);
 									break;
 								case "ifge":			 
-									b = IfCase(ref labels, ref input, 5, true);
+									b = IfCase(ref labels, ref input, 5, true, counter);
 									break;
 								case "ifez":			 
-									b = IfCase(ref labels, ref input, 0, false);
+									b = IfCase(ref labels, ref input, 0, false, counter);
 									break;
 								case "ifnz":			 
-									b = IfCase(ref labels, ref input, 1, false);
+									b = IfCase(ref labels, ref input, 1, false, counter);
 									break;
 								case "ifmi":			 
-									b = IfCase(ref labels, ref input, 2, false);
+									b = IfCase(ref labels, ref input, 2, false, counter);
 									break;
 								case "ifpl":			 
-									b = IfCase(ref labels, ref input, 3, false);
+									b = IfCase(ref labels, ref input, 3, false, counter);
 									break;
 								case "dup":
 									if(input.Length > 1)
@@ -156,7 +164,13 @@ class classes
 											b = a.Dup(labels[input[1]]);
 										}else
 										{
-											b = a.GoTo(int.Parse(input[1], System.Globalization.NumberStyles.HexNumber));	
+											if(input[1].Length > 1 && input[1][1] == 'x')
+											{
+												b = a.Dup(Convert.ToInt32(input[1], 16));	
+											}else
+											{
+												b = a.Dup(int.Parse(input[1]));	
+											}
 										}
 									}else
 									{
@@ -177,7 +191,13 @@ class classes
 											b = a.Push(labels[input[1]]);
 										}else
 										{
-											b = a.GoTo(int.Parse(input[1], System.Globalization.NumberStyles.HexNumber));	
+											if(input[1].Length > 1 && input[1][1] == 'x')
+											{
+												b = a.Push(Convert.ToInt32(input[1], 16));	
+											}else
+											{
+												b = a.Push(int.Parse(input[1]));	
+											}
 										}
 									}else
 									{
@@ -199,7 +219,7 @@ class classes
 		}
 	}
 	//takes the dictionary, intput, and if no for calling the associated function
-	public static byte[] IfCase(ref Dictionary<string, int> labels, ref string[] input, int i, bool j)
+	public static byte[] IfCase(ref Dictionary<string, int> labels, ref string[] input, int i, bool j, int counter)
 	{
 		var a = new Instructions();
 		byte[] b = {0,0,0,0};
@@ -209,10 +229,10 @@ class classes
 			{
 				if(j)
 				{
-					b = a.If(i, labels[input[1]]);
+					b = a.If(i, labels[input[1]], counter);
 				}else
 				{
-					b = a.IfZ(i, labels[input[1]]);	
+					b = a.IfZ(i, labels[input[1]], counter);	
 				}
 			}
 			else
