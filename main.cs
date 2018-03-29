@@ -103,8 +103,20 @@ class classes
 								case "not":
 									b = a.Not();
 									break;
-								case "goto":
-									b = a.GoTo();
+								case "goto":	//add hex to go with label
+									if(input.Length > 1)
+									{
+										if(labels.ContainsKey(input[1]))
+										{	
+											b = a.GoTo(labels[input[1]]);
+										}else
+										{
+											b = a.GoTo(int.Parse(input[1], System.Globalization.NumberStyles.HexNumber));	
+										}
+									}else
+									{
+										b = a.GoTo(0);	
+									}
 									break;
 								case "ifeq":			 
 									b = IfCase(ref labels, ref input, 0, true);
@@ -137,7 +149,19 @@ class classes
 									b = IfCase(ref labels, ref input, 3, false);
 									break;
 								case "dup":
-									b = a.Dup();
+									if(input.Length > 1)
+									{
+										if(labels.ContainsKey(input[1]))
+										{	
+											b = a.Dup(labels[input[1]]);
+										}else
+										{
+											b = a.GoTo(int.Parse(input[1], System.Globalization.NumberStyles.HexNumber));	
+										}
+									}else
+									{
+										b = a.Dup(0);	
+									}
 									break;
 								case "print":
 									b = a.Print();
@@ -146,7 +170,19 @@ class classes
 									b = a.Dump();
 									break;
 								case "push":
-									b = a.Push();
+									if(input.Length > 1)
+									{
+										if(labels.ContainsKey(input[1]))
+										{	
+											b = a.Push(labels[input[1]]);
+										}else
+										{
+											b = a.GoTo(int.Parse(input[1], System.Globalization.NumberStyles.HexNumber));	
+										}
+									}else
+									{
+										b = a.Push(0);	
+									}
 									break;
 								default:
 									Console.WriteLine($"unknown instruction: {input[0]}\n");
